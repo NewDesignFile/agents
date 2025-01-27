@@ -4,11 +4,11 @@
   "description": "Generate AI agent policy files for web apps and sites.",
   "files": ["dist", "schemas", "templates"],
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "agents": "dist/cli.js"
   },
-  "main": "./dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --declaration --outDir dist && cp -r src/schemas dist/ && cp -r src/templates dist/",
     "dev": "ts-node src/cli.ts",

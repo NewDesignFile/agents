@@ -1,1 +1,1 @@
-export declare function validateFiles(outputDir?: string): void;
+export declare function validateFiles(outputDir?: string): Promise<void>;

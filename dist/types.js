@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TEMPLATES = void 0;
-exports.TEMPLATES = {
+export const TEMPLATES = {
     'ai-policy.json': JSON.stringify({
         version: "1.0",
         policy: {
@@ -15,6 +12,6 @@ exports.TEMPLATES = {
         agents: []
     }, null, 2),
     'llms.txt': `# LLM Access Rules
-  User-agent: *
-  Allow: /`
+User-agent: *
+Allow: /`
 };

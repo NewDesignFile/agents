@@ -1,13 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TEMPLATES = void 0;
-exports.generateFiles = generateFiles;
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const path_1 = __importDefault(require("path"));
-exports.TEMPLATES = {
+import fs from 'fs-extra';
+import path from 'path';
+export const TEMPLATES = {
     'ai-policy.json': JSON.stringify({
         version: "1.0",
         policy: {
@@ -24,13 +17,14 @@ exports.TEMPLATES = {
 User-agent: *
 Allow: /`
 };
-function generateFiles(options) {
+export function generateFiles(options) {
     options.files.forEach(file => {
-        const templatePath = path_1.default.join(__dirname, 'templates', file);
-        if (!fs_extra_1.default.existsSync(templatePath)) {
+        const templatePath = path.join('templates', file); // Updated path
+        if (!fs.existsSync(templatePath)) {
             throw new Error(`Template not found: ${file}`);
         }
-        const outputPath = path_1.default.join(options.outputDir, file);
-        fs_extra_1.default.copySync(templatePath, outputPath);
+        const outputPath = path.join(options.outputDir, file);
+        fs.ensureDirSync(path.dirname(outputPath));
+        fs.copySync(templatePath, outputPath);
     });
 }

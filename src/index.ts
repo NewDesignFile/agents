@@ -1,2 +1,2 @@
-export * from './cli';
-export * from './generators';
+export * from './cli.js';
+export * from './generators.js';
