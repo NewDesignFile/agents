@@ -27,12 +27,12 @@ export function generateFiles(options: {
   files: string[];
 }) {
   options.files.forEach(file => {
-    if (!(file in TEMPLATES)) {
-      throw new Error(`Unsupported file type: ${file}`);
+    const templatePath = path.join(__dirname, '../templates', file);
+    if (!fs.existsSync(templatePath)) {
+      throw new Error(`Template not found: ${file}`);
     }
     
     const outputPath = path.join(options.outputDir, file);
-    fs.ensureDirSync(path.dirname(outputPath));
-    fs.writeFileSync(outputPath, TEMPLATES[file as keyof TemplateFiles]);
+    fs.copySync(templatePath, outputPath);
   });
 }

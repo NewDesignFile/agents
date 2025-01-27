@@ -1,0 +1,14 @@
+# LLM Access Policy
+# Default: Allow all LLMs to access public content
+
+User-agent: GPT-4
+Allow: /blog/
+Disallow: /private/
+Require-attribution: true
+
+User-agent: Claude-2
+Allow: /public-data/
+Disallow: /internal/
+
+User-agent: *
+Allow: /

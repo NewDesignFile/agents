@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Agents Schema",
+    "type": "object",
+    "properties": {
+      "version": { "type": "string" },
+      "agents": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" },
+            "type": { "type": "string" },
+            "endpoints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": { "type": "string" },
+                  "protocol": { "type": "string" }
+                }
+              }
+            }
+          },
+          "required": ["id", "type"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["version", "agents"],
+    "additionalProperties": false
+  }

@@ -8,7 +8,7 @@ const ajv = new Ajv();
 
 export function validateFiles(outputDir = '.well-known') {
   const validateAIPolicy = ajv.compile(
-    require('../schemas/ai-policy.schema.json')
+    require('../dist/schemas/ai-policy.schema.json')
   );
   
   const policy = readJSONSync(

@@ -26,11 +26,11 @@ Allow: /`
 };
 function generateFiles(options) {
     options.files.forEach(file => {
-        if (!(file in exports.TEMPLATES)) {
-            throw new Error(`Unsupported file type: ${file}`);
+        const templatePath = path_1.default.join(__dirname, '../templates', file);
+        if (!fs_extra_1.default.existsSync(templatePath)) {
+            throw new Error(`Template not found: ${file}`);
         }
         const outputPath = path_1.default.join(options.outputDir, file);
-        fs_extra_1.default.ensureDirSync(path_1.default.dirname(outputPath));
-        fs_extra_1.default.writeFileSync(outputPath, exports.TEMPLATES[file]);
+        fs_extra_1.default.copySync(templatePath, outputPath);
     });
 }
