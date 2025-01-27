@@ -1,9 +1,9 @@
 {
   "name": "@new-ui/agents",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generate AI agent policy files for web apps and sites.",
   "bin": {
-    "agents": "./dist/cli.js"
+    "agents": "dist/cli.js"
   },
   "main": "index.js",
   "scripts": {
