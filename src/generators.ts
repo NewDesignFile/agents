@@ -27,7 +27,7 @@ export function generateFiles(options: {
   files: string[];
 }) {
   options.files.forEach(file => {
-    const templatePath = path.join(__dirname, '../templates', file);
+    const templatePath = path.join(__dirname, 'templates', file);
     if (!fs.existsSync(templatePath)) {
       throw new Error(`Template not found: ${file}`);
     }

@@ -1,7 +1,7 @@
 # New UI Agents
 Generate AI agent policy files (`ai-policy.json`, `agents.json`, `llms.txt`) for web apps and sites.
 
-- Generate `ai-policy.json`, `agents.json`, and `llms.txt` files with a single command.
+- Generate AI agent policy files with a single command.
 - Validate generated files against JSON schemas.
 - Customize output directory and file selection.
 - Integrate into your project's build or setup process.

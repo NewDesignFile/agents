@@ -7,9 +7,7 @@ import { AIPolicy } from './types';
 const ajv = new Ajv();
 
 export function validateFiles(outputDir = '.well-known') {
-  const validateAIPolicy = ajv.compile(
-    require('../dist/schemas/ai-policy.schema.json')
-  );
+  const validateAIPolicy = ajv.compile(require('./schemas/ai-policy.schema.json'));
   
   const policy = readJSONSync(
     path.join(outputDir, 'ai-policy.json')

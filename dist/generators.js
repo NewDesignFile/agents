@@ -26,7 +26,7 @@ Allow: /`
 };
 function generateFiles(options) {
     options.files.forEach(file => {
-        const templatePath = path_1.default.join(__dirname, '../templates', file);
+        const templatePath = path_1.default.join(__dirname, 'templates', file);
         if (!fs_extra_1.default.existsSync(templatePath)) {
             throw new Error(`Template not found: ${file}`);
         }
