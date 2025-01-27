@@ -1,0 +1,8 @@
+{
+    "version": "1.0",
+    "policy": {
+      "agents": {},
+      "semantic_sitemap": "/ai-sitemap.json",
+      "negotiation_api": "/api/ai-negotiate"
+    }
+  }
