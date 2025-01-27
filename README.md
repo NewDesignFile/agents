@@ -1,12 +1,10 @@
 # New UI Agents
-A utility to generate AI agent policy files (`ai-policy.json`, `agents.json`, `llms.txt`) for modern web apps and sites.
+Generate AI agent policy files (`ai-policy.json`, `agents.json`, `llms.txt`) for web apps and sites.
 
-
-### Features
 - Generate `ai-policy.json`, `agents.json`, and `llms.txt` files with a single command.
 - Validate generated files against JSON schemas.
 - Customize output directory and file selection.
-- Seamlessly integrate into your project's build or setup process.
+- Integrate into your project's build or setup process.
 
 ### Installation
 Install the package locally in your project:

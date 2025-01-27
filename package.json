@@ -1,7 +1,7 @@
 {
   "name": "@new-ui/agents",
   "version": "0.1.0",
-  "description": "Generate AI agent policy files for modern web apps and sites.",
+  "description": "Generate AI agent policy files for web apps and sites.",
   "bin": {
     "agents": "./dist/cli.js"
   },
@@ -12,9 +12,13 @@
     "test": "jest",
     "prepublish": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ai-policy",
+    "agents",
+    "llms"
+  ],
+  "author": "@planetabhi",
+  "license": "MIT",
   "dependencies": {
     "ajv": "^8.17.1",
     "chalk": "^5.4.1",
