@@ -2,9 +2,13 @@ import { readJSONSync } from 'fs-extra';
 import Ajv from 'ajv';
 import path from 'path';
 import { AIPolicy } from './types.js';
-import schema from './schemas/ai-policy.schema.json' assert { type: 'json' }; // Direct import
+import { readFileSync } from 'fs';
 
-const ajv = new Ajv();
+const schema = JSON.parse(
+  readFileSync(new URL('./schemas/ai-policy.schema.json', import.meta.url), 'utf-8')
+);
+
+const ajv = new Ajv.default();
 
 export async function validateFiles(outputDir = '.well-known') {
   const validateAIPolicy = ajv.compile(schema);

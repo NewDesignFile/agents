@@ -1,0 +1,47 @@
+{
+  "version": "{{version}}",
+  "baseUrl": "{{baseUrl}}",
+  "lastUpdated": "{{timestamp}}",
+  "metadata": {
+    "title": "{{projectName}} AI Sitemap",
+    "description": "AI navigation structure for {{projectName}}",
+    "language": "en",
+    "generator": "@new-ui/agents"
+  },
+  "paths": {
+    "/": {
+      "title": "Home",
+      "description": "Main page of {{projectName}}",
+      "lastModified": "{{timestamp}}",
+      "priority": 1.0,
+      "allowedAgents": ["*"],
+      "metadata": {
+        "keywords": ["home", "main", "index"],
+        "seoTitle": "Welcome to {{projectName}}"
+      },
+      "accessRules": {
+        "requireAuth": false,
+        "allowedRoles": ["*"]
+      },
+      "children": []
+    },
+    "/api": {
+      "title": "API Endpoints",
+      "description": "API documentation and endpoints",
+      "lastModified": "{{timestamp}}",
+      "priority": 0.8,
+      "allowedAgents": ["api-docs-agent"],
+      "metadata": {
+        "keywords": ["api", "documentation", "endpoints"],
+        "seoTitle": "{{projectName}} API Documentation"
+      },
+      "accessRules": {
+        "requireAuth": true,
+        "allowedRoles": ["developer", "admin"]
+      },
+      "children": [
+        "/api/ai-negotiate"
+      ]
+    }
+  }
+}

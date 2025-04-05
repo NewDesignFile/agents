@@ -1,0 +1,31 @@
+{
+  "version": "{{version}}",
+  "environment": "{{environment}}",
+  "lastUpdated": "{{timestamp}}",
+  "rules": {
+    "authentication": {
+      "required": true,
+      "methods": ["api_key", "oauth2", "jwt"],
+      "oauth2": {
+        "authorizationUrl": "{{authUrl}}",
+        "tokenUrl": "{{tokenUrl}}",
+        "scopes": ["ai.read", "ai.write", "ai.admin"],
+        "pkce": true
+      },
+      "jwt": {
+        "issuer": "{{baseUrl}}",
+        "audience": "ai-agents",
+        "expiresIn": "1h"
+      }
+    },
+    "contentSecurity": {
+      "maxTokensPerRequest": 4096,
+      "allowedMimeTypes": [
+        "text/plain",
+        "application/json",
+        "text/markdown"
+      ],
+      "maxRequestSize": "1mb"
+    }
+  }
+}

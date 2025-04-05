@@ -1,7 +1,32 @@
 {
     "version": "1.0",
     "policy": {
-      "agents": {},
+      "agents": {
+  "version": "{{version}}",
+  "environment": "{{environment}}",
+  "lastUpdated": "{{timestamp}}",
+  "policy": {
+    "agents": {},
+    "allowedAgentTypes": ["chat", "search", "assistant", "custom"],
+    "supportedLanguages": ["en", "es", "fr", "de", "ja"],
+    "semantic_sitemap": "/ai-sitemap.json",
+    "negotiation_api": "/api/ai-negotiate",
+    "security": {
+      "maxTokensPerRequest": 4096,
+      "requireAuthentication": true,
+      "rateLimiting": {
+        "enabled": true,
+        "maxRequests": 100,
+        "windowMs": 60000
+      }
+    }
+  },
+  "contact": {
+    "name": "{{projectName}} AI Team",
+    "email": "ai@{{projectName}}.com",
+    "url": "{{baseUrl}}/ai-support"
+  }
+},
       "semantic_sitemap": "/ai-sitemap.json",
       "negotiation_api": "/api/ai-negotiate"
     }
