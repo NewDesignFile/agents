@@ -25,7 +25,6 @@
     "format": "prettier --write 'src/**/*.ts'",
     "format:check": "prettier --check 'src/**/*.ts'",
     "type-check": "tsc --noEmit",
-    "validate": "npm run type-check && npm run lint && npm run format:check && npm run test",
     "prepublishOnly": "npm run validate && npm run build"
   },
   "keywords": [
