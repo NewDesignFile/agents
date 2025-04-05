@@ -8,13 +8,16 @@
     "templates"
   ],
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "dist/index.d.ts",
   "bin": {
-    "agents": "dist/cli.js"
+    "agents": "./dist/src/cli.js"
+  },
+  "main": "./dist/src/cli.js",
+  "types": "dist/src/cli.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc --declaration --outDir dist && cp -r src/schemas dist/ && cp -r src/templates dist/",
+    "build": "rm -rf dist && mkdir -p dist && tsc --declaration --outDir dist && cp -r src/schemas dist/ && cp -r src/templates dist/ && ls -la dist/ && chmod +x dist/src/cli.js",
     "dev": "node --no-warnings --loader ts-node/esm src/cli.ts",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
     "lint": "eslint . '**/*.ts' --max-warnings 0",
