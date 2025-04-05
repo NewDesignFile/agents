@@ -1,6 +1,6 @@
 # New UI Agents
 
-A CLI to generate, validate, and manage AI agent policy files for web apps and sites.
+Generate, validate, and manage AI agent policy files for web apps and sites.
 
 ## Features
 
