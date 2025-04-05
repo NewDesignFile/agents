@@ -70,7 +70,7 @@ Disallow: /private/*`,
   }, null, 2)
 };
 
-export async function generateFiles(options: GenerateOptions) {
+export async function generateFiles(options: GenerateOptions): Promise<void> {
   const templates = options.templates || TEMPLATES;
   const variables = options.variables || {};
 

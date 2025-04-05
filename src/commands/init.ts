@@ -105,7 +105,7 @@ function getDefaultOptions(options: InitOptions): PromptAnswers {
   };
 }
 
-async function previewChanges(outputDir: string, variables: TemplateVariables) {
+async function previewChanges(outputDir: string, variables: TemplateVariables): Promise<void> {
   for (const [filename, template] of Object.entries(DEFAULT_TEMPLATES)) {
     const content = templateEngine.render(template, variables);
     logger.info(`\n${path.join(outputDir, filename)}:`);
@@ -113,7 +113,7 @@ async function previewChanges(outputDir: string, variables: TemplateVariables) {
   }
 }
 
-async function generateFiles(outputDir: string, variables: TemplateVariables) {
+async function generateFiles(outputDir: string, variables: TemplateVariables): Promise<void> {
   await fs.ensureDir(outputDir);
 
   for (const [filename, template] of Object.entries(DEFAULT_TEMPLATES)) {

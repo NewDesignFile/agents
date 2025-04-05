@@ -57,7 +57,7 @@ program
   .description('Validate existing policy files')
   .option('-d, --dir <path>', 'Directory containing policy files', '.well-known')
   .option('-f, --fix', 'Attempt to fix validation issues', false)
-  .action(async (options) => {
+  .action(async () => {
     // TODO: Implement validation command
     logger.info('Validation command not yet implemented');
   });
@@ -67,7 +67,7 @@ program
   .description('Upgrade policy files to the latest version')
   .option('-d, --dir <path>', 'Directory containing policy files', '.well-known')
   .option('--dry-run', 'Preview changes without writing files', false)
-  .action(async (options) => {
+  .action(async () => {
     // TODO: Implement upgrade command
     logger.info('Upgrade command not yet implemented');
   });
