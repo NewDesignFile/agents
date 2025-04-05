@@ -18,6 +18,13 @@ export default [
         module: 'readonly',
         require: 'readonly',
         exports: 'readonly',
+        URL: 'readonly',
+        jest: 'readonly',
+        describe: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
       },
       parserOptions: {
         ecmaVersion: 'latest',
