@@ -18,5 +18,5 @@ export const defaultConfig: AgentsConfig = {
   security: {
     checkPolicies: true,
     allowMerge: true,
-  }
+  },
 };

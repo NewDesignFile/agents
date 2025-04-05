@@ -1,16 +1,6 @@
 # New UI Agents
-
 Generate, validate, and manage AI agent policy files for web apps and sites.
 
-## Features
-
-- Interactive setup for easy configuration
-- Multi-environment support (development, staging, production)
-- Rich template system with variable substitution
-- Built-in validation and security checks
-- Comprehensive policy file generation
-- Dry-run mode for previewing changes
-- Automated policy file upgrades
 
 ## Installation
 

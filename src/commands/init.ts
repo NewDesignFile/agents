@@ -22,8 +22,8 @@ interface InitOptions {
 export async function initCommand(options: InitOptions): Promise<void> {
   try {
     await config.loadConfig();
-    
-    const answers = options.interactive 
+
+    const answers = options.interactive
       ? await promptForOptions(options)
       : getDefaultOptions(options);
 
@@ -36,8 +36,14 @@ export async function initCommand(options: InitOptions): Promise<void> {
         version: '1.0',
         baseUrl: process.env.AGENTS_BASE_URL || 'http://localhost:3000',
         timestamp: new Date().toISOString(),
-        authUrl: process.env.AGENTS_AUTH_URL || `${process.env.AGENTS_BASE_URL}/auth` || 'http://localhost:3000/auth',
-        tokenUrl: process.env.AGENTS_TOKEN_URL || `${process.env.AGENTS_BASE_URL}/token` || 'http://localhost:3000/token',
+        authUrl:
+          process.env.AGENTS_AUTH_URL ||
+          `${process.env.AGENTS_BASE_URL}/auth` ||
+          'http://localhost:3000/auth',
+        tokenUrl:
+          process.env.AGENTS_TOKEN_URL ||
+          `${process.env.AGENTS_BASE_URL}/token` ||
+          'http://localhost:3000/token',
       };
 
       if (options.dryRun) {
@@ -49,7 +55,7 @@ export async function initCommand(options: InitOptions): Promise<void> {
 
       await generateFiles(answers.outputDir, variables);
       spinner.succeed('AI agent policy files generated successfully!');
-      
+
       if (answers.createConfig) {
         await config.saveConfig();
       }
@@ -97,7 +103,7 @@ async function promptForOptions(options: InitOptions): Promise<PromptAnswers> {
   return {
     outputDir: outputDir.outputDir,
     environment: environmentAnswer.environment as Environment,
-    createConfig: configAnswer.createConfig
+    createConfig: configAnswer.createConfig,
   };
 }
 
@@ -123,7 +129,7 @@ async function generateFiles(outputDir: string, variables: TemplateVariables): P
   for (const [filename, template] of Object.entries(DEFAULT_TEMPLATES)) {
     const content = templateEngine.render(template, variables);
     const filepath = path.join(outputDir, filename);
-    
+
     const missing = templateEngine.validateVariables(template, variables);
     if (missing.length > 0) {
       throw new Error(`Missing required variables for ${filename}: ${missing.join(', ')}`);

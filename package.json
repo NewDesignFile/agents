@@ -20,7 +20,7 @@
     "build": "rm -rf dist && mkdir -p dist && tsc --declaration --outDir dist && cp -r src/schemas dist/ && cp -r src/templates dist/ && ls -la dist/ && chmod +x dist/src/cli.js",
     "dev": "node --no-warnings --loader ts-node/esm src/cli.ts",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
-    "lint": "eslint . '**/*.ts' --max-warnings 0",
+    "lint": "eslint . --ext .ts --ignore-pattern 'dist/**' --max-warnings 0",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write 'src/**/*.ts'",
     "format:check": "prettier --check 'src/**/*.ts'",

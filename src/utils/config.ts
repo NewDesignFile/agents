@@ -47,7 +47,10 @@ export class ConfigManager {
     return this.config;
   }
 
-  private mergeConfig(defaultConfig: AgentsConfig, userConfig: Partial<AgentsConfig>): AgentsConfig {
+  private mergeConfig(
+    defaultConfig: AgentsConfig,
+    userConfig: Partial<AgentsConfig>
+  ): AgentsConfig {
     return {
       ...defaultConfig,
       ...userConfig,

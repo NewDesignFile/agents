@@ -11,15 +11,19 @@ function validateSecurityPolicy(policy: unknown): SecurityPolicy {
     throw new Error('Invalid security policy format');
   }
 
-  if (securityPolicy.maxTokensPerRequest !== undefined && 
-      typeof securityPolicy.maxTokensPerRequest !== 'number') {
+  if (
+    securityPolicy.maxTokensPerRequest !== undefined &&
+    typeof securityPolicy.maxTokensPerRequest !== 'number'
+  ) {
     throw new Error('maxTokensPerRequest must be a number');
   }
 
   if (securityPolicy.rateLimiting) {
-    if (typeof securityPolicy.rateLimiting.enabled !== 'boolean' ||
-        typeof securityPolicy.rateLimiting.maxRequests !== 'number' ||
-        typeof securityPolicy.rateLimiting.windowMs !== 'number') {
+    if (
+      typeof securityPolicy.rateLimiting.enabled !== 'boolean' ||
+      typeof securityPolicy.rateLimiting.maxRequests !== 'number' ||
+      typeof securityPolicy.rateLimiting.windowMs !== 'number'
+    ) {
       throw new Error('Invalid rate limiting configuration');
     }
   }
@@ -27,7 +31,11 @@ function validateSecurityPolicy(policy: unknown): SecurityPolicy {
   return securityPolicy;
 }
 
-function validateAgentPolicy(policy: unknown, name?: string, result?: ValidationResult): AgentPolicy {
+function validateAgentPolicy(
+  policy: unknown,
+  name?: string,
+  result?: ValidationResult
+): AgentPolicy {
   const agentPolicy = policy as AgentPolicy;
   if (!agentPolicy || typeof agentPolicy !== 'object') {
     throw new Error('Invalid agent policy format');
@@ -46,8 +54,10 @@ function validateAgentPolicy(policy: unknown, name?: string, result?: Validation
   }
 
   if (agentPolicy.rateLimit) {
-    if (typeof agentPolicy.rateLimit.requests !== 'number' ||
-        typeof agentPolicy.rateLimit.period !== 'string') {
+    if (
+      typeof agentPolicy.rateLimit.requests !== 'number' ||
+      typeof agentPolicy.rateLimit.period !== 'string'
+    ) {
       throw new Error('Invalid rate limit configuration');
     }
   }
@@ -85,8 +95,10 @@ function validateAIPolicy(policy: unknown): AIPolicy {
     throw new Error('Version must be a string');
   }
 
-  if (aiPolicy.environment && 
-      !['development', 'staging', 'production'].includes(aiPolicy.environment)) {
+  if (
+    aiPolicy.environment &&
+    !['development', 'staging', 'production'].includes(aiPolicy.environment)
+  ) {
     throw new Error('Invalid environment value');
   }
 
@@ -103,7 +115,9 @@ function validateAIPolicy(policy: unknown): AIPolicy {
     try {
       validateAgentPolicy(agent);
     } catch (error) {
-      throw new Error(`Invalid agent policy for ${name}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `Invalid agent policy for ${name}: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
   });
 
@@ -112,7 +126,9 @@ function validateAIPolicy(policy: unknown): AIPolicy {
     try {
       validateSecurityPolicy(aiPolicy.policy.security);
     } catch (error) {
-      throw new Error(`Invalid security policy: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `Invalid security policy: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
   }
 
@@ -125,7 +141,10 @@ export interface ValidationResult {
   warnings: string[];
 }
 
-export async function validatePolicyFiles(directory: string, fix = false): Promise<ValidationResult> {
+export async function validatePolicyFiles(
+  directory: string,
+  fix = false
+): Promise<ValidationResult> {
   const result: ValidationResult = {
     isValid: true,
     errors: [],
@@ -139,7 +158,7 @@ export async function validatePolicyFiles(directory: string, fix = false): Promi
       const aiPolicyContent = await fs.readJSON(aiPolicyPath);
       try {
         const validatedPolicy = validateAIPolicy(aiPolicyContent);
-        
+
         // Additional semantic validation
         validateSemanticRules(validatedPolicy, result);
 
@@ -162,11 +181,11 @@ export async function validatePolicyFiles(directory: string, fix = false): Promi
     // Log validation results
     if (!result.isValid) {
       logger.error('Validation failed:');
-      result.errors.forEach(error => logger.error('- ' + error));
+      result.errors.forEach((error) => logger.error('- ' + error));
     }
     if (result.warnings.length > 0) {
       logger.warn('Validation warnings:');
-      result.warnings.forEach(warning => logger.warn('- ' + warning));
+      result.warnings.forEach((warning) => logger.warn('- ' + warning));
     }
 
     return result;
@@ -195,12 +214,7 @@ function validateSemanticRules(policy: AIPolicy, result: ValidationResult): void
   });
 }
 
-
-
-async function fixPolicyIssues(
-  filePath: string,
-  policy: AIPolicy
-): Promise<void> {
+async function fixPolicyIssues(filePath: string, policy: AIPolicy): Promise<void> {
   let modified = false;
 
   // Add semantic sitemap if missing
