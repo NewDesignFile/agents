@@ -35,7 +35,11 @@ program
   .description('Initialize AI agent policy files')
   .option('-d, --dir <path>', 'Output directory', '.well-known')
   .option('-i, --interactive', 'Enable interactive mode', false)
-  .option('-e, --environment <env>', 'Target environment (development|staging|production)', 'development')
+  .option(
+    '-e, --environment <env>',
+    'Target environment (development|staging|production)',
+    'development'
+  )
   .option('--dry-run', 'Preview changes without writing files', false)
   .action(async (options) => {
     const env = options.environment as Environment;
