@@ -1,18 +1,87 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "AI Policy Schema",
-    "type": "object",
-    "properties": {
-      "version": { "type": "string" },
-      "policy": {
-        "type": "object",
-        "properties": {
-          "agents": { "type": "object" },
-          "semantic_sitemap": { "type": "string" },
-          "negotiation_api": { "type": "string" }
-        },
-        "required": ["agents"]
-      }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Policy Schema",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string" },
+    "environment": {
+      "type": "string",
+      "enum": ["development", "staging", "production"]
     },
-    "required": ["version", "policy"]
+    "policy": {
+      "type": "object",
+      "properties": {
+        "agents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/agentPolicy"
+          }
+        },
+        "semantic_sitemap": { "type": "string" },
+        "negotiation_api": { "type": "string" },
+        "security": { "$ref": "#/definitions/securityPolicy" }
+      },
+      "required": ["agents"]
+    }
+  },
+  "required": ["version", "policy"],
+  "definitions": {
+    "agentPolicy": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "allowedPaths": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^/" }
+        },
+        "rateLimit": {
+          "type": "object",
+          "properties": {
+            "requests": { "type": "number", "minimum": 1 },
+            "period": { "type": "string" }
+          },
+          "required": ["requests", "period"]
+        },
+        "authentication": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["none", "api_key", "oauth2"]
+            },
+            "config": {
+              "type": "object"
+            }
+          },
+          "required": ["type"]
+        }
+      },
+      "required": ["name", "capabilities", "allowedPaths"]
+    },
+    "securityPolicy": {
+      "type": "object",
+      "properties": {
+        "maxTokensPerRequest": { "type": "number", "minimum": 1 },
+        "allowedDomains": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "requireAuthentication": { "type": "boolean" },
+        "rateLimiting": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "maxRequests": { "type": "number", "minimum": 1 },
+            "windowMs": { "type": "number", "minimum": 1000 }
+          },
+          "required": ["enabled", "maxRequests", "windowMs"]
+        }
+      }
+    }
   }
+}

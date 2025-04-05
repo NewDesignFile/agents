@@ -1,0 +1,60 @@
+{
+  "version": "{{version}}",
+  "lastUpdated": "{{timestamp}}",
+  "standardCapabilities": {
+    "read": {
+      "description": "Read and understand content",
+      "permissions": ["content.read"],
+      "versionRequirements": {
+        "minVersion": "1.0",
+        "maxVersion": "2.0"
+      },
+      "examples": [
+        {
+          "action": "read_page",
+          "parameters": {"url": "{{baseUrl}}/docs/getting-started"}
+        }
+      ]
+    },
+    "navigate": {
+      "description": "Navigate through site structure",
+      "permissions": ["sitemap.read"],
+      "versionRequirements": {
+        "minVersion": "1.0",
+        "maxVersion": "2.0"
+      },
+      "examples": [
+        {
+          "action": "navigate_to",
+          "parameters": {"path": "/api/docs"}
+        }
+      ]
+    },
+    "search": {
+      "description": "Search through content",
+      "permissions": ["content.search"],
+      "versionRequirements": {
+        "minVersion": "1.0",
+        "maxVersion": "2.0"
+      },
+      "examples": [
+        {
+          "action": "search_content",
+          "parameters": {"query": "AI policies", "limit": 10}
+        }
+      ]
+    },
+    "interact": {
+      "description": "Interact with UI elements",
+      "permissions": ["ui.interact"]
+    },
+    "api": {
+      "description": "Make API calls",
+      "permissions": ["api.call"]
+    }
+  },
+  "customCapabilities": {
+    "project": "{{projectName}}",
+    "capabilities": {}
+  }
+}
