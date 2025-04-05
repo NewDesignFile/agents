@@ -1,5 +1,4 @@
 import inquirer from 'inquirer';
-import type { ListQuestion, InputQuestion, ConfirmQuestion } from 'inquirer';
 import path from 'path';
 import fs from 'fs-extra';
 import ora from 'ora';
@@ -71,30 +70,35 @@ interface PromptAnswers {
 }
 
 async function promptForOptions(options: InitOptions): Promise<PromptAnswers> {
-  const questions = [
-    {
-      type: 'input',
-      name: 'outputDir',
-      message: 'Where should the policy files be generated?',
-      default: options.dir || '.well-known',
-    } as InputQuestion<PromptAnswers>,
-    {
-      type: 'list',
-      name: 'environment',
-      message: 'Which environment is this for?',
-      choices: ['development', 'staging', 'production'] as Environment[],
-      default: options.environment || 'development',
-    } as ListQuestion<PromptAnswers>,
-    {
-      type: 'confirm',
-      name: 'createConfig',
-      message: 'Would you like to create a configuration file (.agentsrc.json)?',
-      default: true,
-    } as ConfirmQuestion<PromptAnswers>,
-  ];
+  // Use individual prompts instead of an array of questions
+  const outputDir = await inquirer.prompt({
+    type: 'input',
+    name: 'outputDir',
+    message: 'Where should the policy files be generated?',
+    default: options.dir || '.well-known',
+  });
 
-  const answers = await inquirer.prompt(questions);
-  return answers as PromptAnswers;
+  const environmentAnswer = await inquirer.prompt({
+    type: 'list',
+    name: 'environment',
+    message: 'Which environment is this for?',
+    choices: ['development', 'staging', 'production'] as Environment[],
+    default: options.environment || 'development',
+  });
+
+  const configAnswer = await inquirer.prompt({
+    type: 'confirm',
+    name: 'createConfig',
+    message: 'Would you like to create a configuration file (.agentsrc.json)?',
+    default: true,
+  });
+
+  // Combine the answers
+  return {
+    outputDir: outputDir.outputDir,
+    environment: environmentAnswer.environment as Environment,
+    createConfig: configAnswer.createConfig
+  };
 }
 
 function getDefaultOptions(options: InitOptions): PromptAnswers {
