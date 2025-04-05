@@ -10,7 +10,7 @@ const schema = JSON.parse(
 
 const ajv = new Ajv.default();
 
-export async function validateFiles(outputDir = '.well-known') {
+export async function validateFiles(outputDir = '.well-known'): Promise<void> {
   const validateAIPolicy = ajv.compile(schema);
 
   const policy = readJSONSync(

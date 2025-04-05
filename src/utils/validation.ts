@@ -1,12 +1,3 @@
-// Using type-only imports to avoid zod dependency issues
-type Validator<T> = {
-  parse: (data: unknown) => T;
-  safeParse: (data: unknown) => { success: boolean; data?: T; error?: { errors: Array<{ message: string }> } };
-};
-
-type ZodError = {
-  errors: Array<{ message: string }>;
-};
 import fs from 'fs-extra';
 import path from 'path';
 import { Logger } from './logger.js';
@@ -153,7 +144,7 @@ export async function validatePolicyFiles(directory: string, fix = false): Promi
         validateSemanticRules(validatedPolicy, result);
 
         if (fix && result.warnings.length > 0) {
-          await fixPolicyIssues(aiPolicyPath, validatedPolicy, result);
+          await fixPolicyIssues(aiPolicyPath, validatedPolicy);
         }
       } catch (error) {
         result.isValid = false;
@@ -208,8 +199,7 @@ function validateSemanticRules(policy: AIPolicy, result: ValidationResult): void
 
 async function fixPolicyIssues(
   filePath: string,
-  policy: AIPolicy,
-  result: ValidationResult
+  policy: AIPolicy
 ): Promise<void> {
   let modified = false;
 
